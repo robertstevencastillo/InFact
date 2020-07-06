@@ -1,0 +1,26 @@
+.job-listing-container {
+  margin-bottom: 1rem;
+  padding: 1.25rem;
+  border: 1px solid #d4d2d0;
+  border-radius: 0.5rem;
+  width: 45%;
+}
+
+.job-listing-container:hover {
+  cursor: pointer;
+  border: 1px solid black;
+}
+
+.job-listing-company-logo {
+  width: 6rem;
+}
+
+@media only screen and (max-width: 700px) {
+  .job-listing-container {
+    margin-bottom: 2rem;
+    padding: 1.25rem;
+    border: 1px solid #d4d2d0;
+    border-radius: 0.5rem;
+    width: 100%;
+  }
+}

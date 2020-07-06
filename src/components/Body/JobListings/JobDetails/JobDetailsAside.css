@@ -1,0 +1,14 @@
+.job-details-sidebar-container {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+}
+
+.job-details-aside-back-search-container:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.job-details-sidebar-arrow {
+  width: 0.75rem;
+}

@@ -1,0 +1,35 @@
+.job-listings-container {
+  /* display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  padding-top: 1rem; 
+  use the above code when you decide to add the JobListingSideBar back to the JobListings Page
+  */
+
+  width: 100%;
+  padding-top: 1rem;
+}
+
+.job-listings-job-results-container {
+  /*
+  width: 65%;
+  display: flex;
+  flex-direction: column;
+  use the above code when you decide to add the JobListingSideBar back to the JobListings Page
+  */
+  padding: 0.25rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media only screen and (max-width: 700px) {
+  .job-listings-job-results-container {
+    padding: 0.25rem;
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+  }
+}

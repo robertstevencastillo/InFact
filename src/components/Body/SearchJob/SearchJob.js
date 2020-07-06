@@ -2,10 +2,14 @@ import React, { useState } from "react";
 import "./SearchJob.css";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
+//import LoadingDotsIcon from "../../Utils/LoadingDots/LoadingDotsIcon";
+require("dotenv").config();
 
 function SearchJob(props) {
+  const searchJobString = `${process.env.REACT_APP_CORS_PROXY}https://jobs.github.com/positions.json?${process.env.REACT_APP_GH_CLIENT_KEY}&${process.env.REACT_APP_GH_CLIENT_SECRET}`;
   const [jobTitle, setJobTitle] = useState("");
   const [jobLocation, setJobLocation] = useState("");
+  //const [isLoading, setIsLoading] = useState(false);
 
   function handleJobTitleInput(event) {
     setJobTitle(event.target.value);
@@ -17,14 +21,19 @@ function SearchJob(props) {
 
   async function handleFormSubmit(event) {
     event.preventDefault();
+    //setIsLoading(true);
     try {
-      const response = await axios.get(`https://jobs.github.com/positions.json?description=${jobTitle}&location=${jobLocation}`);
-      console.log(response);
-    } catch (err) {
-      console.log("Error is : " + err);
-    }
+      const response = await axios.get(`${searchJobString}&description=${jobTitle}&location=${jobLocation}&full_time=true&markdown=true`);
 
-    props.history.push("/job-listings");
+      setJobTitle("");
+      setJobLocation("");
+      //setIsLoading(false);
+      console.log(response);
+      props.handleJobResults(response.data);
+      props.history.push("/job-listings");
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (
