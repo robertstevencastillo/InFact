@@ -21,10 +21,10 @@ Demoing the job search functionality ![Infact demo 1 - job search](demo/infactse
 # Screenshots
 
 Home Page
-(demo/homepage.png)
+![infact home page](demo/homepage.png)
 
 Job Results Page
-(demo/jobdetailspage.png)
+![infact job results page](demo/jobdetailspage.png)
 
 Job Details Page
-(demo/resultspage.png)
+![infact job details page](demo/resultspage.png)
