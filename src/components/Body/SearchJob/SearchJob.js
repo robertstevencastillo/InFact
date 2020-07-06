@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./SearchJob.css";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
-//import LoadingDotsIcon from "../../Utils/LoadingDots/LoadingDotsIcon";
+import LoadingDotsIcon from "../../Utils/LoadingDots/LoadingDotsIcon";
+import DispatchContext from "../../../context/DispatchContext";
 require("dotenv").config();
 
 function SearchJob(props) {
   const searchJobString = `https://lovely-glacier-19877.herokuapp.com/https://jobs.github.com/positions.json?${process.env.REACT_APP_GH_CLIENT_KEY}&${process.env.REACT_APP_GH_CLIENT_SECRET}`;
   const [jobTitle, setJobTitle] = useState("");
   const [jobLocation, setJobLocation] = useState("");
-  //const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const appDispatch = useContext(DispatchContext);
 
   function handleJobTitleInput(event) {
     setJobTitle(event.target.value);
@@ -21,20 +23,37 @@ function SearchJob(props) {
 
   async function handleFormSubmit(event) {
     event.preventDefault();
-    //setIsLoading(true);
+    setIsLoading(true);
     try {
       const response = await axios.get(`${searchJobString}&description=${jobTitle}&location=${jobLocation}&full_time=true&markdown=true`);
+      setIsLoading(false);
 
-      setJobTitle("");
-      setJobLocation("");
-      //setIsLoading(false);
-      console.log(response);
-      props.handleJobResults(response.data);
-      props.history.push("/job-listings");
+      if (response.data.length === 0) {
+        console.log("no results");
+        appDispatch({
+          type: "FLASH_MESSAGE",
+          value: "No Results Found",
+        });
+        setJobTitle("");
+        setJobLocation("");
+      } else {
+        setJobTitle("");
+        setJobLocation("");
+        console.log(response);
+        props.handleJobResults(response.data);
+        props.history.push("/job-listings");
+      }
     } catch (err) {
       console.log(err);
     }
   }
+
+  if (isLoading)
+    return (
+      <div className="loading-dots-container">
+        <LoadingDotsIcon />
+      </div>
+    );
 
   return (
     <section className="search-job-container">

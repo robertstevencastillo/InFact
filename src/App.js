@@ -9,12 +9,14 @@ import JobDetails from "./components/Body/JobListings/JobDetails/JobDetails";
 import { useImmerReducer } from "use-immer";
 import StateContext from "./context/StateContext";
 import DispatchContext from "./context/DispatchContext";
+import FlashMessages from "./components/Utils/FlashMessages/FlashMessages";
 
 function App() {
   const [jobResults, setJobResults] = useState([]);
   const initialState = {
     jobResults: [],
     clickedJob: {},
+    flashMessages: [],
   };
 
   const [state, dispatch] = useImmerReducer(appReducer, initialState);
@@ -29,6 +31,7 @@ function App() {
         <BrowserRouter>
           <div className="app">
             <Header />
+            <FlashMessages messages={state.flashMessages} />
             <Switch>
               <Route exact path="/">
                 <SearchJob handleJobResults={handleJobResults} />
@@ -54,7 +57,9 @@ function appReducer(draftState, action) {
     case "JOB_LISTING_CLICK":
       draftState.clickedJob = { ...action.job };
       break;
-
+    case "FLASH_MESSAGE":
+      draftState.flashMessages.push(action.value);
+      break;
     default:
       return draftState;
   }

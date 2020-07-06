@@ -1,4 +1,5 @@
 import React from "react";
+import "./LoadingDotsIcon.css";
 
 function LoadingDotsIcon() {
   return (
