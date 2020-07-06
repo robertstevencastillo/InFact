@@ -6,7 +6,7 @@ import axios from "axios";
 require("dotenv").config();
 
 function SearchJob(props) {
-  const searchJobString = `${process.env.REACT_APP_CORS_PROXY}https://jobs.github.com/positions.json?${process.env.REACT_APP_GH_CLIENT_KEY}&${process.env.REACT_APP_GH_CLIENT_SECRET}`;
+  const searchJobString = `https://lovely-glacier-19877.herokuapp.com/https://jobs.github.com/positions.json?${process.env.REACT_APP_GH_CLIENT_KEY}&${process.env.REACT_APP_GH_CLIENT_SECRET}`;
   const [jobTitle, setJobTitle] = useState("");
   const [jobLocation, setJobLocation] = useState("");
   //const [isLoading, setIsLoading] = useState(false);
