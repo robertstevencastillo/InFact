@@ -24,7 +24,7 @@
   border-width: 1rem;
   font-weight: 750;
   font-size: 17px;
-  width: 10%;
+  width: 6rem;
   text-align: center;
 }
 
@@ -37,4 +37,22 @@
 .job-details-apply-button:hover {
   cursor: pointer;
   text-decoration: underline;
+}
+
+@media only screen and (max-width: 700px) {
+  .job-details-page-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    padding: 1rem;
+  }
+
+  .job-details-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 }

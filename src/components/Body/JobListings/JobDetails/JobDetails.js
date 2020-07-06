@@ -30,6 +30,7 @@ function JobDetails(props) {
           </a>{" "}
         </button>
         <ReactMarkdown source={job.jobDescription} allowedTypes={["paragraph", "strong", "emphasis", "text", "heading", "list", "listItem"]} />
+        <JobDetailsAside howToApplyToJob={job.jobApplicationSteps} />
       </div>
     </div>
   );
