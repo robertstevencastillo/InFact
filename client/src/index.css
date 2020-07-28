@@ -3,6 +3,11 @@ body {
   font-family: Helvetica Neue, Helvetica, Arial, Liberation Sans, Roboto, Noto, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  width: 100vw;
+  height: 100vh;
+  max-width: 100%; /* added */
+  display: grid;
 }
 
 code {

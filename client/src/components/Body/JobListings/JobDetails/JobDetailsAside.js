@@ -1,7 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import "./JobDetailsAside.css";
-import ReactMarkdown from "react-markdown";
+//import ReactMarkdown from "react-markdown";
 
 function JobDetailsAside(props) {
   function handleReturnToSearchClick(event) {
@@ -16,8 +16,7 @@ function JobDetailsAside(props) {
         </span>
         <span onClick={handleReturnToSearchClick}>Back To Search</span>
       </div>
-      <h3>How To Apply</h3>
-      <ReactMarkdown source={props.howToApplyToJob} allowedTypes={["paragraph", "strong", "emphasis", "text", "heading", "list", "listItem"]} />
+      {/* <ReactMarkdown source={props.howToApplyToJob} allowedTypes={["paragraph", "strong", "emphasis", "text", "heading", "list", "listItem"]} /> */}
     </aside>
   );
 }

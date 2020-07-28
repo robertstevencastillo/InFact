@@ -1,0 +1,18 @@
+.recent-searches-container {
+  background-color: #faf9f8;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.recent-searches-section-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 60%;
+}
+
+.recent-searches-list {
+  background-color: white;
+  width: 100%;
+}

@@ -1,12 +1,13 @@
 .search-job-container {
-  margin: 0 auto;
   margin-top: 5rem;
+  margin-bottom: 5rem;
+  display: flex;
+  justify-content: center;
 }
 
 .search-job-form {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
 }
 
 .search-job-form > * {
@@ -18,9 +19,9 @@
   padding: 0.75rem 1rem;
   border-radius: 0.5rem;
   color: #2d2d2d;
-  overflow: hidden;
+  /* overflow: hidden; */
   height: 1.125rem;
-  min-width: 15.69rem;
+  /* min-width: 15.69rem; */
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -30,7 +31,8 @@
   margin-right: 0.5rem;
 }
 
-.search-job-form-inputs input {
+.search-job-form-inputs input,
+select {
   outline: none;
   border-width: 0px;
   border: none;
@@ -53,23 +55,38 @@
   border-radius: 0.5rem;
   border-width: 1rem;
   font-weight: 750;
+  width: 10rem;
 }
 
 .search-job-form-button:hover {
   cursor: pointer;
 }
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 1100px) {
+  .search-job-form {
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .search-job-form-inputs {
+    margin: 1rem 1rem 1rem 1rem;
+  }
+}
+
+@media screen and (max-width: 950px) {
   .search-job-form {
     flex-direction: column;
-    width: 100%;
-  }
-  .search-job-form-inputs {
-    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
   }
 
   .search-job-form-inputs,
   .search-job-form-button {
     margin-top: 1rem;
+    width: 85vw;
+    margin-left: auto;
+    margin-right: auto;
   }
 }

@@ -6,9 +6,9 @@
   padding-top: 1rem; 
   use the above code when you decide to add the JobListingSideBar back to the JobListings Page
   */
-
   width: 100%;
   padding-top: 1rem;
+  margin: auto;
 }
 
 .job-listings-job-results-container {
@@ -19,17 +19,10 @@
   use the above code when you decide to add the JobListingSideBar back to the JobListings Page
   */
   padding: 0.25rem;
-  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
-@media only screen and (max-width: 700px) {
-  .job-listings-job-results-container {
-    padding: 0.25rem;
-    width: 100%;
-    display: block;
-    margin: 0 auto;
-  }
-}
+/* @media only screen and (max-width: 700px) {} */
