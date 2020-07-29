@@ -18,6 +18,11 @@ function App() {
     flashMessages: [],
     recentSearches: [],
     isLoading: false,
+    activePage: 1,
+    activeJobListingCoordinates: {
+      x: 0,
+      y: 0,
+    },
   };
 
   const [state, dispatch] = useImmerReducer(appReducer, initialState);
@@ -61,13 +66,22 @@ function appReducer(draftState, action) {
       draftState.flashMessages.push(action.value);
       break;
     case "ADD_TO_RECENT_SEARCHES":
-      draftState.recentSearches.push({ jobTitle: action.jobTitle, jobLocation: action.jobLocation });
+      draftState.recentSearches.push({ jobTitle: action.jobTitle, jobLocation: action.jobLocation, distance: action.distance });
       break;
     case "APP_IS_LOADING":
       draftState.isLoading = true;
       break;
     case "APP_NOT_LOADING":
       draftState.isLoading = false;
+      break;
+    case "ACTIVE_JOB_LISTINGS_PAGE":
+      draftState.activePage = action.activePage;
+      break;
+    case "ACTIVE_JOB_JOB_LISTING_COORDINATES":
+      draftState.activeJobListingCoordinates = {
+        x: action.xCoordinate,
+        y: action.yCoordinate,
+      };
       break;
     default:
       return draftState;

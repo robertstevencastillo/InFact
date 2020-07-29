@@ -18,7 +18,8 @@
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
-    "use-immer": "^0.4.0"
+    "use-immer": "^0.4.0",
+    "uuid": "^8.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -29,7 +30,6 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "proxy": "http://localhost:5000/",
   "browserslist": {
     "production": [
       ">0.2%",
@@ -41,5 +41,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://localhost:5000"
 }

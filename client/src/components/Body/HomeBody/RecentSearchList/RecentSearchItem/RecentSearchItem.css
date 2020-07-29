@@ -1,5 +1,6 @@
 .recent-search-item {
   border-bottom: solid 1px black;
+  padding: 0.2rem;
 }
 
 .recent-search-item:hover {
@@ -7,11 +8,9 @@
   text-decoration: underline;
 }
 
-.recent-search-item-job-title {
-  color: #2d2d2d;
-}
-
-.recent-search-item-job-location {
+.recent-search-item-job-title,
+.recent-search-item-job-location,
+.recent-search-item-job-distance {
   color: #6f6f6f;
   font-size: 0.875rem;
 }
