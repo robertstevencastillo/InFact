@@ -32,6 +32,7 @@ function JobListing(props) {
 
       //console.log(event.target);
       // appDispatch({ type: "ACTIVE_JOB_JOB_LISTING_COORDINATES", x: event.target.screenX, y: event.target.screenY });
+      /*Can't access event.target.screenX or screenY for some reason. What I want to happen is when the back to search arrow is clicked with the JobDetailsComponent, I want to scroll down to this job listing, using the coordinates contained in global state JOB_LISTING_CLICK. The scroll should occur within JobListings.js */
 
       props.history.push(`${props.location.pathname}/${props.jobId}`);
     } catch (err) {
