@@ -16,27 +16,25 @@ function JobDetails(props) {
   return (
     <div className="job-details-page-container">
       <JobDetailsAside />
-      <div className="job-details-container">
-        {!("jobData" in job) ? (
-          <JobNotFound jobLink={job.url} />
-        ) : (
-          <>
-            <h2>{job.JobTitle === null ? "N/A" : job.jobTitle}</h2>
-            <h3>{job.companyName === null ? "N/A" : job.companyName}</h3>
-            <span>{job.jobLocation === null ? "N/A" : job.jobLocation}</span>
-            <p>{job.postedDate === null ? "N/A" : job.postedDate}</p>
+      {!("jobData" in job) ? (
+        <JobNotFound jobLink={job.url} />
+      ) : (
+        <div className="job-details-container">
+          <h2>{job.JobTitle === null ? "N/A" : job.jobTitle}</h2>
+          <h3>{job.companyName === null ? "N/A" : job.companyName}</h3>
+          <span>{job.jobLocation === null ? "N/A" : job.jobLocation}</span>
+          <p>{job.postedDate === null ? "N/A" : job.postedDate}</p>
 
-            <button className="job-details-apply-button">
-              {" "}
-              <a target="_blank" rel="noopener noreferrer" href={job.url}>
-                Apply
-              </a>{" "}
-            </button>
-            <div dangerouslySetInnerHTML={jobContentsMarkup()} />
-            <JobDetailsAside />
-          </>
-        )}
-      </div>
+          <button className="job-details-apply-button">
+            {" "}
+            <a target="_blank" rel="noopener noreferrer" href={job.url}>
+              Apply
+            </a>{" "}
+          </button>
+          <div dangerouslySetInnerHTML={jobContentsMarkup()} />
+          <JobDetailsAside />
+        </div>
+      )}
     </div>
   );
 }

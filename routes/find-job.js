@@ -24,7 +24,9 @@ router.get("/", async (request, response) => {
 
 const getJobDescription = async url => {
   try {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+      headless: true,
+    });
     const page = await browser.newPage();
     await page.goto(url);
     const result = await page.evaluate(() => {
@@ -42,3 +44,5 @@ const getJobDescription = async url => {
 };
 
 module.exports = router;
+
+/*The issue is, when the app is deployed, it's not scraping the job details at indeed! */
