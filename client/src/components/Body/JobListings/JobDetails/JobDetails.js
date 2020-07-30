@@ -7,7 +7,6 @@ import JobNotFound from "../../JobNotFound/JobNotFound";
 function JobDetails(props) {
   const appState = useContext(StateContext);
   const job = { ...appState.clickedJob };
-  console.log(job);
 
   function jobContentsMarkup() {
     return { __html: job.jobData.jobBody };
