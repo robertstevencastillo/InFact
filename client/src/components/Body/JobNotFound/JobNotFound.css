@@ -1,0 +1,9 @@
+.job-not-found-container {
+  padding: 10px;
+  background-color: #ffbaba;
+  color: #d8000c;
+}
+
+.job-not-found-container a {
+  color: black;
+}

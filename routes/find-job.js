@@ -28,7 +28,8 @@ const getJobDescription = async url => {
     const page = await browser.newPage();
     await page.goto(url);
     const result = await page.evaluate(() => {
-      let jobBody = document.querySelector(".jobsearch-jobDescriptionText").innerHTML;
+      // let jobBody = document.querySelector(".jobsearch-jobDescriptionText").innerHTML;
+      let jobBody = document.querySelector(".jobsearch-JobComponent-description").innerHTML;
       return {
         jobBody,
       };

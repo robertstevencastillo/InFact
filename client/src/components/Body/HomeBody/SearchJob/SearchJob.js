@@ -2,11 +2,9 @@ import React, { useState, useContext } from "react";
 import "./SearchJob.css";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
-// import LoadingDotsIcon from "../../../Utils/LoadingDots/LoadingDotsIcon";
+import LoadingDotsIcon from "../../../Utils/LoadingDots/LoadingDotsIcon";
 import DispatchContext from "../../../../context/DispatchContext";
-// import StateContext from "../../../../context/StateContext";
 const countryCityState = require("countrycitystatejson");
-require("dotenv").config();
 
 function SearchJob(props) {
   const [jobTitle, setJobTitle] = useState("");
@@ -14,7 +12,7 @@ function SearchJob(props) {
   const [jobCity, setJobCity] = useState("Allentown");
   const [distance, setDistance] = useState(10);
   const appDispatch = useContext(DispatchContext);
-  // const appState = useContext(StateContext);
+  const [loading, setLoading] = useState(false);
 
   function handleJobTitleInput(event) {
     setJobTitle(event.target.value);
@@ -23,7 +21,7 @@ function SearchJob(props) {
   async function handleFormSubmit(event) {
     event.preventDefault();
     const jobLocation = jobCity === "" ? jobState : `${jobCity}, ${jobState}`;
-    appDispatch({ type: "APP_IS_LOADING", value: true });
+    setLoading(true);
     try {
       const response = await axios.get("/find-jobs", {
         params: {
@@ -35,10 +33,7 @@ function SearchJob(props) {
         },
       });
       const results = [...response.data];
-
-      console.log(results);
-
-      appDispatch({ type: "APP_NOT_LOADING", value: false });
+      setLoading(false);
 
       if (results.length === 0) {
         console.log("no results");
@@ -50,6 +45,7 @@ function SearchJob(props) {
       } else {
         appDispatch({ type: "ADD_TO_RECENT_SEARCHES", jobTitle, jobLocation, distance });
         appDispatch({ type: "SAVE_JOB_RESULTS", jobResults: results });
+        appDispatch({ type: "ACTIVE_JOB_LISTINGS_PAGE", activePage: 1 });
         setJobTitle("");
         props.history.push("/job-listings");
       }
@@ -78,56 +74,55 @@ function SearchJob(props) {
     return kilometers;
   }
 
-  // if (appState.isLoading)
-  //   return (
-  //     <div className="loading-dots-container">
-  //       <LoadingDotsIcon />
-  //     </div>
-  //   );
-
   return (
     <>
-      <section className="search-job-container">
-        <form className="search-job-form" onSubmit={handleFormSubmit}>
-          <div className="search-job-form-inputs search-job-form-inputs-job">
-            <label>What</label>
-            <input required placeholder="Job title, keywords" value={jobTitle} onChange={handleJobTitleInput}></input>
-          </div>
+      {loading ? (
+        <div className="loading-dots-container">
+          <LoadingDotsIcon />
+        </div>
+      ) : (
+        <section className="search-job-container">
+          <form className="search-job-form" onSubmit={handleFormSubmit}>
+            <div className="search-job-form-inputs search-job-form-inputs-job">
+              <label>What</label>
+              <input required placeholder="Job title, keywords" value={jobTitle} onChange={handleJobTitleInput}></input>
+            </div>
 
-          <div className="search-job-form-inputs">
-            <label>State</label>
-            <select required onChange={handleStateCategoryChange} value={jobState}>
-              {countryCityState.getStatesByShort("US").map((state, index) => {
-                return (
-                  <option key={index} value={state}>
-                    {state}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
+            <div className="search-job-form-inputs">
+              <label>State</label>
+              <select required onChange={handleStateCategoryChange} value={jobState}>
+                {countryCityState.getStatesByShort("US").map((state, index) => {
+                  return (
+                    <option key={index} value={state}>
+                      {state}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
 
-          <div className="search-job-form-inputs">
-            <label>City</label>
-            <select onChange={handleCityChange} value={jobCity}>
-              {countryCityState.getCities("US", jobState).map((city, index) => {
-                return (
-                  <option key={index} value={city}>
-                    {city}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
+            <div className="search-job-form-inputs">
+              <label>City</label>
+              <select onChange={handleCityChange} value={jobCity}>
+                {countryCityState.getCities("US", jobState).map((city, index) => {
+                  return (
+                    <option key={index} value={city}>
+                      {city}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
 
-          <div className="search-job-form-inputs">
-            <label>Distance (miles)</label>
-            <input required type="number" value={distance} onChange={handleDistanceChange} />
-          </div>
+            <div className="search-job-form-inputs">
+              <label>Distance (miles)</label>
+              <input required type="number" value={distance} onChange={handleDistanceChange} />
+            </div>
 
-          <button className="search-job-form-button">Find Jobs</button>
-        </form>
-      </section>
+            <button className="search-job-form-button">Find Jobs</button>
+          </form>
+        </section>
+      )}
     </>
   );
 }

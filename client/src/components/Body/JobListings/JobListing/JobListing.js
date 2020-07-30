@@ -2,19 +2,15 @@ import React, { useContext } from "react";
 import "./JobListing.css";
 import { withRouter } from "react-router-dom";
 import DispatchContext from "../../../../context/DispatchContext";
-// import StateContext from "../../../../context/StateContext";
 import ReactMarkdown from "react-markdown";
-// import LoadingDotsIcon from "../../../Utils/LoadingDots/LoadingDotsIcon";
 import axios from "axios";
-require("dotenv").config();
 
 function JobListing(props) {
   const appDispatch = useContext(DispatchContext);
-  // const appState = useContext(StateContext);
 
   async function handleJobListingClick(event) {
     event.preventDefault();
-    appDispatch({ type: "APP_IS_LOADING", value: true });
+    appDispatch({ type: "APP_IS_LOADING" });
 
     try {
       const response = await axios.get("/find-job", {
@@ -26,8 +22,7 @@ function JobListing(props) {
           jobLocation: props.jobLocation,
         },
       });
-      console.log(response);
-      appDispatch({ type: "APP_NOT_LOADING", value: false });
+      appDispatch({ type: "APP_NOT_LOADING" });
       appDispatch({ type: "JOB_LISTING_CLICK", job: response.data });
 
       //console.log(event.target);
@@ -39,13 +34,6 @@ function JobListing(props) {
       console.log(err);
     }
   }
-
-  // if (appState.isLoading)
-  //   return (
-  //     <div className="loading-dots-container">
-  //       <LoadingDotsIcon />
-  //     </div>
-  //   );
 
   return (
     <div className="job-listing-container" onClick={handleJobListingClick}>

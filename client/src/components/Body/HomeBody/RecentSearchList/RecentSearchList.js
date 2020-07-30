@@ -1,18 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { withRouter } from "react-router-dom";
 import DispatchContext from "../../../../context/DispatchContext";
 import StateContext from "../../../../context/StateContext";
 import RecentSearchItem from "./RecentSearchItem/RecentSearchItem";
-// import LoadingDotsIcon from "../../../Utils/LoadingDots/LoadingDotsIcon";
+import LoadingDotsIcon from "../../../Utils/LoadingDots/LoadingDotsIcon";
 import axios from "axios";
 import "./RecentSearchList.css";
 
 function RecentSearchList(props) {
   const appDispatch = useContext(DispatchContext);
   const appState = useContext(StateContext);
+  const [loading, setLoading] = useState(false);
 
   async function handleRecentSearchItemClick(searchQueryObj) {
-    appDispatch({ type: "APP_IS_LOADING", value: true });
+    setLoading(true);
     const response = await axios.get("/find-jobs", {
       params: {
         title: searchQueryObj.jobTitle,
@@ -23,9 +24,9 @@ function RecentSearchList(props) {
       },
     });
     const results = [...response.data];
-    appDispatch({ type: "APP_NOT_LOADING", value: false });
-    console.log(response);
+    setLoading(false);
     appDispatch({ type: "SAVE_JOB_RESULTS", jobResults: results });
+    appDispatch({ type: "ACTIVE_JOB_LISTINGS_PAGE", activePage: 1 });
     props.history.push("/job-listings");
   }
 
@@ -34,16 +35,13 @@ function RecentSearchList(props) {
     return kilometers;
   }
 
-  // if (appState.isLoading)
-  //   return (
-  //     <div className="loading-dots-container">
-  //       <LoadingDotsIcon />
-  //     </div>
-  //   );
-
   return (
     <>
-      {appState.recentSearches.length === 0 ? (
+      {loading ? (
+        <div className="loading-dots-container">
+          <LoadingDotsIcon />
+        </div>
+      ) : appState.recentSearches.length === 0 ? (
         <div></div>
       ) : (
         <section className="recent-searches-container">
