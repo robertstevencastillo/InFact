@@ -16,6 +16,7 @@ function SavedJobs(props) {
 
   return (
     <div className="saved-jobs-page-container">
+      <h2>Saved Jobs</h2>
       <div className="saved-jobs-container">
         {appState.savedJobs < 1 ? (
           <div>No Saved Jobs...</div>

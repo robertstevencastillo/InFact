@@ -12,26 +12,12 @@ function JobDetails(props) {
   const job = { ...appState.clickedJob };
 
   useEffect(() => {
-    if (appState.savedJobs > 0) {
-      appState.savedJobs.forEach(savedJob => {
-        console.log("We Got Saved Jobs");
-        if ((savedJob.jobTitle === job.jobTitle && savedJob.companyName === job.companyName) || savedJob.jobTitle === job.jobTitle) {
-          console.log("Job is saved");
-          setIsJobSaved(true);
-          return;
-        } else {
-          console.log("Job not saved");
-          setIsJobSaved(false);
-        }
-      });
-    }
-
     if (job.jobSaved === true) {
       setIsJobSaved(true);
     } else {
       setIsJobSaved(false);
     }
-  }, []);
+  }, [job.jobSaved]);
 
   function handleSaveJobClick(event) {
     event.preventDefault();
@@ -63,7 +49,9 @@ function JobDetails(props) {
           </button>
 
           {isJobSaved ? (
-            <button className="job-details-save-job-button-disabled">Saved</button>
+            <button className="job-details-save-job-button-disabled" disabled>
+              Saved
+            </button>
           ) : (
             <button onClick={handleSaveJobClick} className="job-details-save-job-button">
               Save

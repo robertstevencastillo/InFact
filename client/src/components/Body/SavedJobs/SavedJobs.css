@@ -4,6 +4,10 @@
   margin: auto;
 }
 
+.saved-jobs-page-container h2 {
+  text-align: center;
+}
+
 .saved-jobs-container {
   padding: 0.25rem;
   display: flex;

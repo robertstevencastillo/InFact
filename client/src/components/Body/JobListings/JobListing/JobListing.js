@@ -1,41 +1,21 @@
-import React, { useContext } from "react";
+import React from "react";
 import "./JobListing.css";
-import { withRouter } from "react-router-dom";
-import DispatchContext from "../../../../context/DispatchContext";
 import ReactMarkdown from "react-markdown";
-import axios from "axios";
 
 function JobListing(props) {
-  const appDispatch = useContext(DispatchContext);
+  function handleJobListingClick() {
+    const jobClicked = {
+      url: `https://${props.url}`,
+      jobId: props.jobId,
+      jobTitle: props.jobTitle,
+      companyName: props.companyName,
+      postedDate: props.postedDate,
+      jobLocation: props.jobLocation,
+      jobSummary: props.jobSummary,
+      jobSaved: false,
+    };
 
-  async function handleJobListingClick(event) {
-    event.preventDefault();
-    appDispatch({ type: "APP_IS_LOADING" });
-
-    try {
-      const response = await axios.get("/find-job", {
-        params: {
-          url: `https://${props.jobUrl}`,
-          jobId: props.jobId,
-          jobTitle: props.jobTitle,
-          companyName: props.companyName,
-          postedDate: props.postedDate,
-          jobLocation: props.jobLocation,
-          jobSummary: props.jobSummary,
-          jobSaved: false,
-        },
-      });
-      appDispatch({ type: "APP_NOT_LOADING" });
-      appDispatch({ type: "JOB_LISTING_CLICK", job: response.data });
-
-      //console.log(event.target);
-      // appDispatch({ type: "ACTIVE_JOB_JOB_LISTING_COORDINATES", x: event.target.screenX, y: event.target.screenY });
-      /*Can't access event.target.screenX or screenY for some reason. What I want to happen is when the back to search arrow is clicked with the JobDetailsComponent, I want to scroll down to this job listing, using the coordinates contained in global state JOB_LISTING_CLICK. The scroll should occur within JobListings.js */
-
-      props.history.push(`${props.location.pathname}/${props.jobId}`);
-    } catch (err) {
-      console.log(err);
-    }
+    props.handleJobListingClick(jobClicked);
   }
 
   return (
@@ -58,4 +38,4 @@ function JobListing(props) {
   );
 }
 
-export default withRouter(JobListing);
+export default JobListing;
