@@ -1,12 +1,43 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import StateContext from "../../../../context/StateContext";
+import DispatchContext from "../../../../context/DispatchContext";
 import "./JobDetails.css";
 import JobDetailsAside from "./JobDetailsAside";
 import JobNotFound from "../../JobNotFound/JobNotFound";
 
 function JobDetails(props) {
   const appState = useContext(StateContext);
+  const appDispatch = useContext(DispatchContext);
+  const [isJobSaved, setIsJobSaved] = useState(false);
   const job = { ...appState.clickedJob };
+
+  useEffect(() => {
+    if (appState.savedJobs > 0) {
+      appState.savedJobs.forEach(savedJob => {
+        console.log("We Got Saved Jobs");
+        if ((savedJob.jobTitle === job.jobTitle && savedJob.companyName === job.companyName) || savedJob.jobTitle === job.jobTitle) {
+          console.log("Job is saved");
+          setIsJobSaved(true);
+          return;
+        } else {
+          console.log("Job not saved");
+          setIsJobSaved(false);
+        }
+      });
+    }
+
+    if (job.jobSaved === true) {
+      setIsJobSaved(true);
+    } else {
+      setIsJobSaved(false);
+    }
+  }, []);
+
+  function handleSaveJobClick(event) {
+    event.preventDefault();
+    appDispatch({ type: "SAVE_JOB", job });
+    setIsJobSaved(true);
+  }
 
   function jobContentsMarkup() {
     return { __html: job.jobData.jobBody };
@@ -30,6 +61,15 @@ function JobDetails(props) {
               Apply
             </a>{" "}
           </button>
+
+          {isJobSaved ? (
+            <button className="job-details-save-job-button-disabled">Saved</button>
+          ) : (
+            <button onClick={handleSaveJobClick} className="job-details-save-job-button">
+              Save
+            </button>
+          )}
+
           <div dangerouslySetInnerHTML={jobContentsMarkup()} />
           <JobDetailsAside />
         </div>
@@ -39,36 +79,3 @@ function JobDetails(props) {
 }
 
 export default JobDetails;
-
-/*if days ago is greather than 365 subtract in years, if less 365 use days */
-
-/* 
-  const date = new Date();
-  const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
-
-Old Return 
-  return (
-    <div className="job-details-page-container">
-      <JobDetailsAside />
-      <div className="job-details-container">
-        <h3>
-          <ReactMarkdown source={job.name} allowedTypes={["paragraph", "strong", "emphasis", "text", "heading", "list", "listItem"]} />
-        </h3>
-        <h2>{job.jobTitle}</h2>
-        <p>Posted {Math.round(Math.abs((date - new Date(job.publication_date)) / oneDay))} days ago</p>
-        <span>
-          <strong>{job.company.name}</strong>
-        </span>
-        <span>{job.locations[0].name}</span>
-        <button className="job-details-apply-button">
-          {" "}
-          <a target="_blank" rel="noopener noreferrer" href={job.refs.landing_page}>
-            Apply
-          </a>{" "}
-        </button>
-        <div dangerouslySetInnerHTML={jobContentsMarkup()} />
-        <JobDetailsAside />
-      </div>
-    </div>
-  );
-*/

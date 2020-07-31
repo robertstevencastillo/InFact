@@ -16,10 +16,13 @@ function JobListing(props) {
       const response = await axios.get("/find-job", {
         params: {
           url: `https://${props.jobUrl}`,
+          jobId: props.jobId,
           jobTitle: props.jobTitle,
           companyName: props.companyName,
           postedDate: props.postedDate,
           jobLocation: props.jobLocation,
+          jobSummary: props.jobSummary,
+          jobSaved: false,
         },
       });
       appDispatch({ type: "APP_NOT_LOADING" });

@@ -10,6 +10,7 @@ import { useImmerReducer } from "use-immer";
 import StateContext from "./context/StateContext";
 import DispatchContext from "./context/DispatchContext";
 import FlashMessages from "./components/Utils/FlashMessages/FlashMessages";
+import SavedJobs from "./components/Body/SavedJobs/SavedJobs";
 
 function App() {
   const initialState = {
@@ -23,6 +24,7 @@ function App() {
       x: 0,
       y: 0,
     },
+    savedJobs: [],
   };
 
   const [state, dispatch] = useImmerReducer(appReducer, initialState);
@@ -37,6 +39,9 @@ function App() {
             <Switch>
               <Route exact path="/">
                 <HomeBody />
+              </Route>
+              <Route exact path="/saved-jobs">
+                <SavedJobs />
               </Route>
               <Route exact path="/job-listings">
                 <JobListings />
@@ -82,6 +87,10 @@ function appReducer(draftState, action) {
         x: action.xCoordinate,
         y: action.yCoordinate,
       };
+      break;
+    case "SAVE_JOB":
+      action.job.jobSaved = true;
+      draftState.savedJobs.push(action.job);
       break;
     default:
       return draftState;

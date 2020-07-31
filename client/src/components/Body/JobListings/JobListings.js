@@ -28,20 +28,26 @@ function JobListings(props) {
 
   // implemented pagination functionality from this Brad Traversy Video - https://www.youtube.com/watch?v=IYCa1F-OWmk
   return (
-    <div className="job-listings-container">
-      {appState.isLoading ? (
-        <div className="loading-dots-container">
-          <LoadingDotsIcon />
-        </div>
+    <>
+      {appState.jobResults.length < 1 ? (
+        <div className="no-search-results-container">No Search Results...</div>
       ) : (
-        <div className="job-listings-job-results-container">
-          {currentJobs.map((jobResult, index) => {
-            return <JobListing key={index} jobId={uuidv4()} jobTitle={jobResult.title} companyName={jobResult.company} jobLocation={jobResult.location} jobSalary={jobResult.salary} jobSummary={jobResult.summary} postedDate={jobResult.datePosted} jobUrl={jobResult.href} />;
-          })}
-          <Pagination jobsPerPage={jobsPerPage} totalJobs={appState.jobResults.length} paginate={paginate} />
+        <div className="job-listings-container">
+          {appState.isLoading ? (
+            <div className="loading-dots-container">
+              <LoadingDotsIcon />
+            </div>
+          ) : (
+            <div className="job-listings-job-results-container">
+              {currentJobs.map((jobResult, index) => {
+                return <JobListing key={index} jobId={uuidv4()} job={jobResult} jobTitle={jobResult.title} companyName={jobResult.company} jobLocation={jobResult.location} jobSalary={jobResult.salary} jobSummary={jobResult.summary} postedDate={jobResult.datePosted} jobUrl={jobResult.href} jobSaved={jobResult.jobSaved} />;
+              })}
+              <Pagination jobsPerPage={jobsPerPage} totalJobs={appState.jobResults.length} paginate={paginate} />
+            </div>
+          )}
         </div>
       )}
-    </div>
+    </>
   );
 }
 export default JobListings;

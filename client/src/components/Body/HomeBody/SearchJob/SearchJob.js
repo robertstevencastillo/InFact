@@ -29,7 +29,7 @@ function SearchJob(props) {
           location: jobLocation,
           country: "North America",
           radius: ConvertMilesToKilometersDistance(distance),
-          count: 50,
+          count: 100,
         },
       });
       const results = [...response.data];

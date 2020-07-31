@@ -20,10 +20,11 @@
   width: 6rem;
 }
 
-.job-details-apply-button {
+.job-details-apply-button,
+.job-details-save-job-button {
   background-color: #2d2d2d;
-  border: 0.125rem solid #2d2d2d;
   color: white;
+  border: 0.125rem solid #2d2d2d;
   border-radius: 0.5rem;
   border-width: 1rem;
   font-weight: 750;
@@ -32,13 +33,30 @@
   text-align: center;
 }
 
+.job-details-save-job-button-disabled {
+  background-color: #cccccc;
+  border: 0.125rem solid #cccccc;
+  color: white;
+  border-radius: 0.5rem;
+  border-width: 1rem;
+  font-weight: 750;
+  font-size: 17px;
+  width: 6rem;
+  text-align: center;
+}
+.job-details-save-job-button-disabled:hover {
+  text-decoration: none;
+  cursor: not-allowed;
+}
+
 .job-details-apply-button a {
   text-decoration: none;
   color: white;
   text-align: center;
 }
 
-.job-details-apply-button:hover {
+.job-details-apply-button:hover,
+.job-details-save-job-button:hover {
   cursor: pointer;
   text-decoration: underline;
 }

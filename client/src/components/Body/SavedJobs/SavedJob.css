@@ -1,0 +1,37 @@
+.saved-job-container {
+  margin-bottom: 1rem;
+  padding: 1.25rem;
+  border: 1px solid #d4d2d0;
+  border-radius: 0.5rem;
+  width: 55%;
+}
+
+.saved-job-container:hover {
+  cursor: pointer;
+  border: 1px solid black;
+}
+
+.saved-job-container button {
+  background-color: #2d2d2d;
+  border: 0.125rem solid #2d2d2d;
+  color: white;
+  border-radius: 0.5rem;
+  border-width: 0.5rem;
+  font-size: 17px;
+  text-align: center;
+}
+
+.saved-job-container button:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+@media only screen and (max-width: 700px) {
+  .saved-job-container {
+    margin-bottom: 2rem;
+    padding: 1.25rem;
+    border: 1px solid #d4d2d0;
+    border-radius: 0.5rem;
+    width: 80%;
+  }
+}

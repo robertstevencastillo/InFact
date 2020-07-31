@@ -11,6 +11,13 @@
   margin: auto;
 }
 
+.no-search-results-container {
+  width: 100%;
+  padding-top: 1rem;
+  margin: auto;
+  text-align: center;
+}
+
 .job-listings-job-results-container {
   /*
   width: 65%;

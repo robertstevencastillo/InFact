@@ -8,10 +8,13 @@ router.get("/", async (request, response) => {
     let jobData = await getJobDescription(request.query.url);
     response.json({
       url: request.query.url,
+      jobId: request.query.jobId,
       jobTitle: request.query.jobTitle,
       companyName: request.query.companyName,
       postedDate: request.query.postedDate,
       jobLocation: request.query.jobLocation,
+      jobSummary: request.query.jobSummary,
+      jobSaved: request.query.jobSaved,
       jobData,
     });
   } catch (error) {

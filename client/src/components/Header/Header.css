@@ -19,3 +19,8 @@
 .header-container .header-logo {
   margin-left: 1rem;
 }
+
+img {
+  width: 5rem;
+  height: 2rem;
+}
