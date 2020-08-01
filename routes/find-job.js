@@ -47,5 +47,3 @@ const getJobDescription = async url => {
 };
 
 module.exports = router;
-
-/*The issue is, when the app is deployed, it's not scraping the job details at indeed! */
